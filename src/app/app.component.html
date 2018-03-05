@@ -1,0 +1,44 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h6>
+    Welcome to {{ title }}!
+  </h6>
+  <div class="container-fluid">
+
+      <div class="row" *ngIf="users">
+          <div *ngFor="let user of users" class="col-sm-4">
+              <div class="col-sm-8 box">
+                <div class=" albumArt">
+                    <img class="image" [src]="user.images[1].url">
+                </div>
+                <div class="albumName">
+                    {{user.name}}
+                </div>
+                <a [href]="user.external_urls.spotify" target="_blank" role="button" class="btn btn-primary albumButton">Open</a>
+              </div>
+          </div>
+      </div>
+
+      <div *ngIf="!users && error"> {{error}} </div>
+      
+      <!-- pager -->
+      <ul *ngIf="pageObject.pages && pageObject.pages.length>1" class="pagination">
+        <li [ngClass]="{disabled:pageObject.currentPage === 1}">
+            <a (click)="onPageClick(1)">First</a>
+        </li>
+        <li [ngClass]="{disabled:pageObject.currentPage === 1}">
+            <a (click)="onPageClick(pageObject.currentPage - 1)">Previous</a>
+        </li>
+        <li *ngFor="let page of pageObject.pages" [ngClass]="{active:pageObject.currentPage === page}">
+            <a (click)="onPageClick(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pageObject.currentPage === pageObject.totalPages}">
+            <a (click)="onPageClick(pageObject.currentPage + 1)">Next</a>
+        </li>
+        <li [ngClass]="{disabled:pageObject.currentPage === pageObject.totalPages}">
+            <a (click)="onPageClick(pageObject.totalPages)">Last</a>
+        </li>
+    </ul>
+  </div>
+</div>
+
