@@ -8,8 +8,10 @@
       <div class="row" *ngIf="users">
           <div *ngFor="let user of users" class="col-sm-4">
               <div class="col-sm-8 box">
-                <div class=" albumArt">
-                    <img class="image" [src]="user.images[1].url">
+                <div class="albumArt">
+                    <div class="img" [ngStyle]="{'background':'url(' +user.images[1].url+ ') no-repeat center','background-size': '90px 85px'}">
+                    
+                    </div>
                 </div>
                 <div class="albumName">
                     {{user.name}}
